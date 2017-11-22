@@ -1,23 +1,23 @@
 /*
  * Copyright (c) 2017 by Rafael Angel Aznar Aparici (rafaaznar at gmail dot com)
- * 
- * trolleyes-server3: Helps you to develop easily AJAX web applications 
+ *
+ * trolleyes-server3: Helps you to develop easily AJAX web applications
  *               by copying and modifying this Java Server.
  *
  * Sources at https://github.com/rafaelaznar/trolleyes-server3
- * 
+ *
  * trolleyes-server3 is distributed under the MIT License (MIT)
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,21 +30,81 @@ package eu.rafaelaznar.bean.specificimplementation;
 
 import com.google.gson.annotations.Expose;
 import eu.rafaelaznar.bean.genericimplementation.TableGenericBeanImplementation;
+import eu.rafaelaznar.bean.meta.publicinterface.MetaPropertyBeanInterface;
+import eu.rafaelaznar.helper.EnumHelper;
 import java.util.Date;
 
 public class PedidoSpecificBeanImplementation extends TableGenericBeanImplementation {
 
     @Expose
+    @MetaPropertyBeanInterface(
+        IsId = false,
+        Name = "fecha",
+        ShortName = "Fecha",
+        LongName = "Fecha",
+        Description = "Fecha del pedido",
+        Type = EnumHelper.FieldType.Date,
+        IsRequired = true,
+        IsForeignKeyDescriptor = true
+    )
     private Date fecha;
+    
     @Expose
+    @MetaPropertyBeanInterface(
+            IsId = false,
+            Name = "iva",
+            ShortName = "Iva",
+            LongName = "Iva",
+            Description = "Iva del pedido",
+            Type = EnumHelper.FieldType.Integer,
+            IsRequired = true,
+            IsForeignKeyDescriptor = true
+    )
     private int iva;
+    
     @Expose
+    @MetaPropertyBeanInterface(
+            IsId = false,
+            Name = "tiene_iva",
+            ShortName = "Tiene Iva",
+            LongName = "Tiene Iva",
+            Description = "Tiene Iva el pedido",
+            Type = EnumHelper.FieldType.Boolean,
+            IsRequired = true,
+            IsForeignKeyDescriptor = true
+    )
     private int tiene_iva;
+    
 
     //---
     @Expose(serialize = false)
+    @MetaPropertyBeanInterface(
+            IsId = false,
+            Name = "id_usuario",
+            ShortName = "ID Usuario",
+            LongName = "ID de Usuario",
+            Description = "ID Usuario del pedido",
+            Type = EnumHelper.FieldType.Id,
+            IsRequired = true,
+            IsIdForeignKey = true,
+            IsObjForeignKey = false,
+            References = "usuario"
+    )
     private Integer id_usuario = 0;
+    
     @Expose(deserialize = false)
+    @MetaPropertyBeanInterface(
+            IsId = false,
+            Name = "id_tipousuario",
+            ShortName = "ID Tipousuario",
+            LongName = "ID del Usuario",
+            Description = "ID de Usuario del pedido",
+            Type = EnumHelper.FieldType.String,
+            IsRequired = true,
+            IsIdForeignKey = false,
+            IsObjForeignKey = true,
+            References = "usuario"
+    )
     private UsuarioSpecificBeanImplementation obj_usuario = null;
 
     public PedidoSpecificBeanImplementation() {
@@ -153,5 +213,4 @@ public class PedidoSpecificBeanImplementation extends TableGenericBeanImplementa
 //        }
 //        return this;
 //    }
-
 }

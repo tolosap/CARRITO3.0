@@ -36,7 +36,7 @@ import eu.rafaelaznar.helper.EnumHelper;
 import java.util.Date;
 
 @MetaObjectBeanInterface(
-        Name = "UsuarioSpecificBeanImplementation",        
+        Name = "UsuarioSpecificBeanImplementation",
         TableName = "usuario",
         Description = "Usuarios del sistema",
         Icon = "fa-user",
@@ -54,7 +54,8 @@ public class UsuarioSpecificBeanImplementation extends TableGenericBeanImplement
             LongName = "DNI",
             Description = "Documento nacional de identidad",
             Type = EnumHelper.FieldType.String,
-            IsRequired = true      
+            IsRequired = true,
+            IsForeignKeyDescriptor = true
     )
     private String dni;
 
@@ -66,11 +67,12 @@ public class UsuarioSpecificBeanImplementation extends TableGenericBeanImplement
             LongName = "Nombre",
             Description = "Nombre del usuario",
             Type = EnumHelper.FieldType.String,
-            IsRequired = true            
+            IsRequired = true,
+            IsForeignKeyDescriptor = true
     )
     private String nombre;
-    
-    @Expose    
+
+    @Expose
     @MetaPropertyBeanInterface(
             IsId = false,
             Name = "primer_apellido",
@@ -78,24 +80,100 @@ public class UsuarioSpecificBeanImplementation extends TableGenericBeanImplement
             LongName = "Primer Apellido",
             Description = "Primer Apellido del usuario",
             Type = EnumHelper.FieldType.String,
-            IsRequired = true            
-    )        
+            IsRequired = true,
+            IsForeignKeyDescriptor = true
+    )
     private String primer_apellido;
-    
+
     @Expose
+    @MetaPropertyBeanInterface(
+            IsId = false,
+            Name = "segundo_apellido",
+            ShortName = "2do. Ap.",
+            LongName = "Segundo Apellido",
+            Description = "Segundo Apellido del usuario",
+            Type = EnumHelper.FieldType.String,
+            IsRequired = true,
+            IsForeignKeyDescriptor = true
+    )
     private String segundo_apellido;
+
     @Expose
+    @MetaPropertyBeanInterface(
+            IsId = false,
+            Name = "login",
+            ShortName = "Login",
+            LongName = "Login",
+            Description = "Login del usuario",
+            Type = EnumHelper.FieldType.String,
+            IsRequired = true
+    )
     private String login;
+
     @Expose(serialize = false)
+    @MetaPropertyBeanInterface(
+            IsId = false,
+            Name = "password",
+            ShortName = "Pass",
+            LongName = "Password",
+            Description = "Contraseña del usuario",
+            Type = EnumHelper.FieldType.String,
+            IsRequired = true
+    )
     private String password;
+
     @Expose
+    @MetaPropertyBeanInterface(
+            IsId = false,
+            Name = "email",
+            ShortName = "E-mail",
+            LongName = "E-mail",
+            Description = "E-mail del usuario",
+            Type = EnumHelper.FieldType.String,
+            IsRequired = true
+    )
     private String email;
+
     @Expose
+    @MetaPropertyBeanInterface(
+            IsId = false,
+            Name = "fecha_nacimiento",
+            ShortName = "Fecha nacimiento",
+            LongName = "Fecha de nacimiento",
+            Description = "Fecha de nacimiento del usuario",
+            Type = EnumHelper.FieldType.Date,
+            IsRequired = true
+    )
     private Date fecha_nacimiento;
 
     @Expose(serialize = false)
+    @MetaPropertyBeanInterface(
+            IsId = false,
+            Name = "id_tipousuario",
+            ShortName = "ID Tipousuario",
+            LongName = "ID de Tipo Usuario",
+            Description = "ID Tipo usuario del usuario",
+            Type = EnumHelper.FieldType.Id,
+            IsRequired = true,
+            IsIdForeignKey = true,
+            IsObjForeignKey = false,
+            References = "tipousuario"
+    )
     private Integer id_tipousuario = 0;
+    
     @Expose(deserialize = false)
+    @MetaPropertyBeanInterface(
+            IsId = false,
+            Name = "obj_usuario",
+            ShortName = "OBJ Tipousuario",
+            LongName = "OBJ de Tipo Usuario",
+            Description = "OBJ Tipo usuario del usuario",
+            Type = EnumHelper.FieldType.String,
+            IsRequired = true,
+            IsIdForeignKey = false,
+            IsObjForeignKey = true,
+            References = "tipousuario"
+    )
     private TipousuarioSpecificBeanImplementation obj_tipousuario = null;
 
     public UsuarioSpecificBeanImplementation() {
